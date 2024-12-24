@@ -28,7 +28,11 @@ abstract class TextFieldValidator extends FieldValidator<String?> {
 
   @override
   String? call(String? value) {
-    return (ignoreEmptyValues && value!.isEmpty) ? null : super.call(value);
+    if (ignoreEmptyValues && (value?.isEmpty ?? true)) {
+      return null;
+    }
+
+    return super.call(value);
   }
 
   /// helper function to check if an input matches a given pattern
